@@ -1,0 +1,56 @@
+
+===============  852. Peak Index in a Mountain Array =========  
+
+Link:- https://leetcode.com/problems/peak-index-in-a-mountain-array/               
+
+It's a biatonic/mountain array i.e. increases then decreases.
+
+Brute Force Method :- Search Linearly O(n)
+
+Best Method :- Use Binary Search O(logn)
+
+So there will be 3 cases:
+
+1. when u find the middle element and it's the peak i.e. mid-1<mid<mid+1.
+
+2. If mid is less than mid+1 it means we are in increasing part of array so start=mid+1 because we know mid+1 is biggest so make that out starting point.
+
+3. If mid is greater than the mid+1 we know we are in decreasing part and so end=mid beacuse   we don't know if mid-1 is greator or smaller.
+
+
+
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        
+        int max =0;
+        int start=0;
+        int end =arr.length-1;
+        
+        while(start<=end)
+        {
+            int mid= start +(end-start)/2;
+            
+            // When mid is the solution itself
+            if(arr[mid-1]<arr[mid] && arr[mid]>arr[mid+1]){
+                return mid;
+            }
+            
+            // when mid elements is less than the mid+1
+            
+            if(arr[mid]<arr[mid+1])
+            {
+                start=mid+1;
+            }
+            else
+            {
+                end=mid;
+            }
+            
+            
+        }
+        return arr[0]; // if only 1 element is present in array
+    }
+}
+
+
+
