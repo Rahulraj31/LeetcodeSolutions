@@ -1,0 +1,101 @@
+                     ======= Find in Mountain Array =======
+
+
+Link - https://leetcode.com/problems/find-in-mountain-array/
+
+
+Ok first we find the peak index just to know where array changes from asc to desc
+then apply binary search in both halves , here we can use agnostic binary search as it can be applied for both asc and desc part.
+1st half 0 to peak index 
+2nd half peakindex+1 to end
+
+
+
+
+
+class Solution {
+    public int findInMountainArray(int target, MountainArray mountainArr) {
+        
+        int peak=peakIndexInMountainArray(mountainArr);  // peak index 
+        
+        // Use for order agnostic
+        int end= mountainArr.length()-1;
+        
+        int firstHalf= orderAgnosticBS(mountainArr,0,peak,target);
+        
+        if(firstHalf!=-1)
+        {
+            return firstHalf;
+        }
+        
+        
+      int secondHalf=orderAgnosticBS(mountainArr,peak+1,end,target);
+        
+    
+        return secondHalf;
+        
+    }
+    
+    
+    
+    public int peakIndexInMountainArray(MountainArray arr) {
+        
+        int max =0;
+        int start=0;
+        int end =arr.length()-1;
+        
+        while(start<end)
+        {
+            int mid = start + (end-start)/2;
+            
+            if(arr.get(mid)<arr.get(mid+1))
+            {
+                start=mid+1;
+            }
+            else
+            {
+                end=mid;
+            }
+             
+        }
+        return start; 
+    }
+    
+    
+    
+    
+    public int orderAgnosticBS(MountainArray arr, int start, int end,int target){
+     
+     // finding array is asc or desc
+
+     boolean isAsc = arr.get(start)< arr.get(end);
+
+     while(start<= end){
+        int mid = start + (end-start)/2;
+
+        if(arr.get(mid)==target)
+        {
+            return mid;
+        }
+        if(isAsc)
+        {
+            if (target < arr.get(mid)) {
+                end = mid - 1;
+              } else { 
+                start = mid + 1;
+              }
+        }
+        else
+        {
+            if (target > arr.get(mid)) {
+                end = mid - 1;
+              } else { 
+                start = mid + 1;
+              }
+        }
+        
+     }
+
+    return -1;    
+    }
+}
