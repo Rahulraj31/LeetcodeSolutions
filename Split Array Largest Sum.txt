@@ -1,0 +1,63 @@
+                ========   Split Array Largest Sum   ========
+
+
+Leetcode Link-  https://leetcode.com/problems/split-array-largest-sum/
+
+Asked in Google 
+Out of all the possible sub array sums we need to find the minimum of it. 
+Video exp link  3:29:00  https://www.youtube.com/watch?v=W9QJ8HaRvJQ&t=11633s
+
+
+eg.  
+[7,2,5,10,8]              largest sum 
+1.  [7,2,5,10]  [8]  =       24   
+2. [7,2,5], [10,8]  =       18      <------So this Minimum largest Sum 
+3. [7,2], [5,10,8] =          23
+4. [2], [7,5,10,8]  =         40 
+
+
+==================================================
+
+
+class Solution {
+    public int splitArray(int[] arr, int m) {
+        
+        int start=0;
+        int end=0;
+
+        for (int i=0;i<arr.length;i++){
+            start = Math.max(start,arr[i]) ;// int the end of the loop this will contain the max item   from the array
+
+            end +=arr[i];
+        }
+        // Binary Search
+
+        while(start<end){
+            int mid = start + (end-start)/2;
+            
+            // Calculate how many peices you  can divide this in with this max sum
+            int sum=0;
+            int pieces=1;
+
+            for(int num:arr){
+                if(sum+num>mid){
+                     // you cannot add this in subarry make u one create new array
+
+                     sum=num;
+                     pieces++;
+                }else{
+                    sum +=num;
+                }
+            }
+
+            if(pieces>m){
+                start=mid+1;
+            }
+            else{
+                end=mid;
+            }
+        }
+
+        return end;         //here start will equal to end causing break in loop
+    }
+}
