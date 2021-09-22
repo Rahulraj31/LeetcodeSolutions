@@ -1,0 +1,47 @@
+      				===  Missing Number ===
+
+Link- https://leetcode.com/problems/missing-number/
+video Link -  https://youtu.be/JfinxytTYFQ
+
+**AMAZON QUES**
+
+Use of Cyclic Sort in this Question as 0 to N range array then O(1) space and O(N) time.
+just here we are starting with 0 so all values will have same index value instead of n-1 value.
+And if array is like this [0,1,2,3] in this case, 4 is missing as 0 to 4(N) is range hence return N or arr.length.
+
+
+--------------------------------
+
+class Solution {
+    public int missingNumber(int[] arr) {
+        
+        int i=0;
+        
+        while(i<arr.length)
+        {
+          int  correctIndex=arr[i];
+            
+            if(arr[i]<arr.length && arr[i]!=arr[correctIndex] )  // or arr[i]!=arr[arr[i]]
+            {
+                int temp=arr[correctIndex];
+                arr[correctIndex]=arr[i];
+                arr[i]=temp;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        
+        // now searching
+       
+        for(int j=0;j<arr.length;j++)
+        {
+            if(j != arr[j])
+            {
+                return j;
+            }
+        }
+      return arr.length;  
+    }
+}
