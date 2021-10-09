@@ -1,0 +1,38 @@
+                     		=== Flipping an Image ===
+
+
+
+Link - https://leetcode.com/problems/flipping-an-image/
+
+Google Question 
+-------------------------------------------------------------------
+revert can be done using XOR (^)as
+
+1 ^ 1=0
+0 ^ 1 =1
+
+Video Solution Link - https://youtu.be/fzip9Aml6og  2:10:05
+
+----------------------------------------------------------------------------
+
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        
+        for (int i=0; i<image.length ;i++){
+            // reverse the array
+            
+            for(int j=0; j< (image[i].length +1)/2 ; j++){
+                
+                // swap
+                int temp = image[i][j] ^1;     // doing XOR in the same
+                
+                image[i][j] = image[i][image[i].length-j-1] ^1;
+                
+                image[i][image[i].length-j-1]= temp;
+                
+            }
+        }
+        
+        return image;
+    }
+}
