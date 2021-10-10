@@ -1,0 +1,23 @@
+                     		=== Single Number ===
+
+
+
+https://leetcode.com/problems/single-number/
+
+Apply XOR in all the array. Duplicates will give 0 and non duplicates will give 1,
+Order doesn't matter as in the end duplicates will give 1 . Time Complexity O(N)
+
+--------------------------------------
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        
+        int unique=0;
+
+        for (int n:nums){
+            unique^=n;
+        }
+        return unique;
+        
+    }
+}
