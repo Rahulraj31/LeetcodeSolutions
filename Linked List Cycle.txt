@@ -1,0 +1,36 @@
+					=== 141. Linked List Cycle ===
+
+https://leetcode.com/problems/linked-list-cycle
+
+video sol - [45:23] https://www.youtube.com/watch?v=70tx7KcMROc&list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ&index=45&t=2s
+
+**Amazon and Microsoft** 
+This is also known as fast and slow pointer method
+Used for :-
+	1. Inplace reversal of LL
+	2. Cycle detection
+	3. finding a node
+Fast pointer moves 2 block and slow pointer moves 1 block and when fast and slow meets at a block/node there is a cycle and if any one them becomes null no cycle exist.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        
+// now fast can't be null as it means LL is empty but also fast.next/slow.next can't be null as it means there is no cycle
+       
+        while(fast!=null && fast.next !=null){
+            fast=fast.next.next;
+            slow=slow.next;
+            
+            if(fast==slow){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
