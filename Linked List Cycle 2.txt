@@ -1,0 +1,54 @@
+			=== Linked List Cycle II ===
+
+https://leetcode.com/problems/linked-list-cycle-ii/
+
+video sol - [1:03:53] https://www.youtube.com/watch?v=70tx7KcMROc&list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ&index=45&t=2723s
+
+1. First we find length of cycle
+2. Then we use 2 pointer method 
+3.  then move s length of the cycle times
+4.  then keep moving both pointers forward and they will meet at cycle start
+
+---------------------------------------------------------------------------------------------------------
+
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        
+        // finding cycle and then its len
+        ListNode fast = head;
+        ListNode slow = head;
+
+         while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast)
+            {
+                ListNode temp = slow;
+                int length = 0;
+                
+                do{
+                temp = temp.next;
+                length++;
+                } while(temp != slow);
+                
+                
+                // findind start node now 
+                
+                ListNode f = head;
+                ListNode s = head;
+                
+                while(length > 0){
+                s = s.next;
+                length--;
+                }
+                
+                while(f != s){
+                f = f.next;
+                s = s.next;
+            }
+            return f;
+        }
+    }
+    return null;
+ }    
+}
