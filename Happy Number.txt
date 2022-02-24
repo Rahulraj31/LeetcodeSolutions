@@ -1,0 +1,74 @@
+				=== Happy Number ===
+https://leetcode.com/problems/happy-number/
+
+Video sol - [1:15:57]  https://youtu.be/70tx7KcMROc
+
+**Google**
+**Use Linked List Cycle Detection**
+Lets see a example which is not a happy number **Ex:- 12**. <Br>
+Now while doing the process their will be a situation when the numbers will repeat and making a cycle. Hence then we can know the given is not happy number.
+
+So we will be using Slow fast pointer technique i.e move slow by 1 and fast by 2. To do this we find square of slow once and fast twice like this -  
+ - slow=findSq(slow);
+ - fast = findSq( findSq(slow ));
+
+
+
+-----------------------------------------------------------------
+class Solution {
+    public boolean isHappy(int n) {
+        int slow=n;
+        int fast =n;
+        
+        do{
+            slow=findSq(slow);
+            fast = findSq(findSq(fast));
+            
+        } while(slow != fast);      
+            // using do while to run this loop atleast one time
+        
+        if (slow==1){
+            return true;
+        }   
+        return false;
+    }
+    
+    
+    public int findSq(int n){
+        int ans=0;
+        
+        while(n > 0){
+            int t = n % 10;
+            ans += t*t;
+            n = n/10;
+        }
+        return ans;
+    }
+}
+
+---------------------------------
+
+**Normal Apprach** 
+
+public boolean isHappy(int n) {
+        while(true) {
+            n = getNext(n);
+            if(n==1 || n==7) {
+                return true;
+            }
+            if(n<10) {
+                return false;
+            }
+        }
+    }
+private int getNext(int n) {
+        int sum=0;
+        while(n>0) {
+            int rem = n%10;
+            sum+=rem*rem;
+            n=n/10;
+        }
+        return sum;
+    }
+
+
