@@ -1,0 +1,29 @@
+			=== Middle of the Linked List ===
+
+https://leetcode.com/problems/middle-of-the-linked-list/
+
+**GOOGLE**
+
+**Normal Approch/ Brute Force method**
+Find length of linked list  then go to middle element. but it will take 2 pass.
+
+**Efficient Method => 2 Pointer Slow-Fast Method**
+*Gives solution in 1 pass*. Slow moves 1x and Fast moves 2x.  **So when fast will be at end slow will be at middle**
+
+
+**Video Solution**- [1:27:07]https://www.youtube.com/watch?v=70tx7KcMROc&list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ&index=44&t=5228s&ab_channel=KunalKushwaha
+
+-----------------------------------------------------------------------------------
+class Solution {
+    public ListNode middleNode(ListNode head) {
+       ListNode fast = head;
+       ListNode slow = head;
+        
+        while(fast!=null && fast.next!=null){
+            
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+}
