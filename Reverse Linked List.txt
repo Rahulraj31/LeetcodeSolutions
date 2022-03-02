@@ -1,0 +1,40 @@
+				=== 206 Reverse Linked List ===
+
+https://leetcode.com/problems/reverse-linked-list/
+
+** Inplace Reversal Method **
+
+Google Microsoft Amazon
+Video Sol -[1:56:5] https://www.youtube.com/watch?v=70tx7KcMROc&t=6199s
+
+No recursion involved. 
+So we will take 3 pointers. Present which will be pointing current and previous which will be pointing the previous element and Next pointer pointing next element.
+
+
+-------------------------------------------------------------------------------
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null){
+            return head;
+        }
+
+        
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode after = curr.next;
+        
+        
+        while(curr!=null){     // means prev will go till last element     
+            curr.next = prev;  // changing the direction of arrow
+            prev = curr;
+            curr = after;
+            if(after != null){ //  null pointer exception  check for after
+                after = after.next;
+            }
+        }
+        
+        head = prev;
+        return head;
+    }
+}
